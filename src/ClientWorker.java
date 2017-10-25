@@ -35,21 +35,23 @@ public class ClientWorker implements Runnable {
                     try {
                         //ANY DATA I GET FROM THIS STREAM IS FROM THIS PARTICULAR CLIENT ONLY!
                         if(in.read()!=-1)
-                        logical_clocks[id] = in.read();
+                            logical_clocks[id] = in.read();
                         //System.out.println("RECEIVED FROM CLIENT " + id + " " + logical_clocks[id]);
 
                     } catch (IOException e) {
                         System.exit(-1);
                     }
+                    Server server_obj = new Server();
+                    int avg = server_obj.berkely_algoorithm(logical_clocks);
 
-                    dout.write(logical_clocks[id]);
+                    dout.write(avg);
 
                     dout.flush();
                     //System.out.println("FROM CLIENT " + id + ": " + logical_clocks[id]);
 
 
                     for (int i = 0; i < 5; i++) {
-                         System.out.println(logical_clocks[i]);
+                        System.out.println(logical_clocks[i]);
                     }
                     System.out.println("\n\n");
                 }
@@ -60,11 +62,9 @@ public class ClientWorker implements Runnable {
             try {
                 client.close();
                 //in.close();;
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }*/
 
