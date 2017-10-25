@@ -34,6 +34,7 @@ public class ClientWorker implements Runnable {
                 } else {
                     try {
                         //ANY DATA I GET FROM THIS STREAM IS FROM THIS PARTICULAR CLIENT ONLY!
+                        if(in.read()!=-1)
                         logical_clocks[id] = in.read();
                         //System.out.println("RECEIVED FROM CLIENT " + id + " " + logical_clocks[id]);
 
