@@ -9,6 +9,7 @@ public class Server extends Thread{
     private static Socket socket_obj;
     private static ServerSocket ss_obj;
     int [] clock_values = {0,0,0,0,0};
+    static int size = 2;
 
 
 
@@ -46,22 +47,37 @@ public class Server extends Thread{
       int client = 1;
       try {
           ss_obj = new ServerSocket(port);
-          System.out.println("Server is on: "+port);
+          System.out.println("Server is on: " + port);
 
-          while(true)
-          {
-              ClientWorker cw_obj;
-              try{
-                  cw_obj = new ClientWorker(ss_obj.accept(), client);
-                  //client++;
-                  /**
-                   * adding the new clients into the array list
-                   */
-                  arr_List.add(cw_obj);
-                  Thread thread_obj = new Thread(cw_obj);
-                  thread_obj.start();
-                  System.out.println(arr_List);
-              }
+
+          while (arr_List.size() < size) {
+
+              //try{
+              // cw_obj = null;
+              //Thread thread_obj = new Thread(cw_obj);
+
+              ClientWorker cw_obj = new ClientWorker(ss_obj.accept(), client);
+              //ClientWorker  cw1_obj = new ClientWorker(ss_obj.accept(), client+1);
+              //ClientWorker  cw_obj = new ClientWorker(ss_obj.accept(), client);
+              client++;
+              Thread thread_obj = new Thread(cw_obj);
+              //Thread thread_obj1= new Thread(cw1_obj);
+              /**
+               * adding the new clients into the array list
+               */
+              arr_List.add(cw_obj);
+              //arr_List.add(cw1_obj);
+
+
+              System.out.println(arr_List);
+              //while(arr_List.size() < size )
+              //{
+
+              thread_obj.start();
+              //thread_obj1.start();
+
+          }
+      }
               catch(Exception e)
               {
                   e.printStackTrace();
@@ -72,20 +88,11 @@ public class Server extends Thread{
               Server t_obj = new Server();
               t_obj.start();
               System.out.println("client connected id:" +t_obj.getState());*/
-              client++;
-          }
-      } catch (IOException e) {
-          e.printStackTrace();
+              //client++;
+          //}
+
       }
-      finally {
-          try{
-              socket_obj.close();
-          }
-          catch (Exception e)
-          {
-              e.printStackTrace();
-          }
-      }
+
 
 
   }
@@ -99,4 +106,4 @@ public class Server extends Thread{
 
 
 
-}
+
