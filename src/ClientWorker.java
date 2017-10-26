@@ -28,7 +28,7 @@ public class ClientWorker implements Runnable {
         }
 
         try {
-            while (in.read() >= 0) {
+            while (in.read()!=-1) {
                 if (in.read() == -1) {
                     System.out.println("end");
                 } else {
@@ -43,8 +43,23 @@ public class ClientWorker implements Runnable {
                     }
                     Server server_obj = new Server();
                     int avg = server_obj.berkely_algoorithm(logical_clocks);
+                    int off[] = new int[5];
+                    for(int i = 0 ; i < 5; i++)
+                    {
+                        off[i] = avg;
+                        //System.out.println(off[i]);
+                    }
+                    int offset[] = new int[5];
+                    offset[id] = logical_clocks[id] - off[id];
+                    for(int i =0; i < 5; i++)
+                    {
+                    //    System.out.println(offset[i]);
+                    }
+                    //System.out.println("\n\n");
 
-                    dout.write(avg);
+
+                    String s = Integer.toString(offset[id]) + "\n";
+                    dout.writeBytes(s);
 
                     dout.flush();
                     //System.out.println("FROM CLIENT " + id + ": " + logical_clocks[id]);
