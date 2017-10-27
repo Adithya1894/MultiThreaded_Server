@@ -1,8 +1,15 @@
+/**
+ * author: Adithya Morampudi
+ */
+
 import java.net.*;
 import java.io.*;
 import java.util.*;
 
-
+/**
+ * Server Class which takes care of the requests from multiple clients and Synchronizes
+ * the logical clock values using the ClientWorker class
+ */
 public class Server extends Thread{
     private static int port = 8423;
     private static int clock = 0;
@@ -32,7 +39,7 @@ public class Server extends Thread{
             sum = sum + a[i];
 
         }
-        int avg =  sum/5;
+        int avg =  sum/2;
         return avg;
         //send();
 
