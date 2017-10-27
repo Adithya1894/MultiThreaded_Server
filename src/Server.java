@@ -39,7 +39,7 @@ public class Server extends Thread{
             sum = sum + a[i];
 
         }
-        int avg =  sum/2;
+        int avg =  sum/size;
         return avg;
         //send();
 
