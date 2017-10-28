@@ -4,7 +4,7 @@
 
 
 
-import com.sun.deploy.util.SessionState;
+//import com.sun.deploy.util.SessionState;
 
 import java.net.Socket;
 import java.io.*;
@@ -87,7 +87,7 @@ public class ClientWorker implements Runnable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } /*finally {
+        } finally {
             try {
                 client.close();
                 //in.close();;
@@ -95,7 +95,6 @@ public class ClientWorker implements Runnable {
                 e.printStackTrace();
             }
         }
-    }*/
+    }
 
     }
-}
