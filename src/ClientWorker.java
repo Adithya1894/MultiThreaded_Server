@@ -31,6 +31,7 @@ public class ClientWorker implements Runnable {
         int line = 0;
         BufferedReader in = null;
         DataOutputStream dout = null;
+        String str;
         try {
             in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             dout = new DataOutputStream(client.getOutputStream());
@@ -40,17 +41,18 @@ public class ClientWorker implements Runnable {
         }
 
         try {
-            while (in.read()!=-1) {
-                if (in.read() == -1) {
+            while (in.readLine()!=null) {
+               /* if (in.read() == -1) {
                     System.out.println("end");
-                } else {
+                }*/ //else {
                     try {
                         //ANY DATA I GET FROM THIS STREAM IS FROM THIS PARTICULAR CLIENT ONLY!
-                        if(in.read()!=-1)
-                            logical_clocks[id] = in.read();
-                        else{
-                            logical_clocks[id] = logical_clocks[id];
-                        }
+                        //if(in.read()!=-1)
+                            str = in.readLine();
+                            logical_clocks[id] = Integer.parseInt(str);
+                        //else{
+                          //  logical_clocks[id] = logical_clocks[id];
+                        //}
                         //System.out.println("RECEIVED FROM CLIENT " + id + " " + logical_clocks[id]);
 
                     } catch (IOException e) {
@@ -80,10 +82,10 @@ public class ClientWorker implements Runnable {
 
 
                     //for (int i = 0; i < 5; i++) {
-                        //System.out.println(logical_clocks[i]);
+                    //System.out.println(logical_clocks[i]);
                     //}
                     System.out.println("\n\n");
-                }
+              //  }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -97,4 +99,4 @@ public class ClientWorker implements Runnable {
         }
     }
 
-    }
+}
