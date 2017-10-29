@@ -16,21 +16,55 @@ public class Server extends Thread{
     private static Socket socket_obj;
     private static ServerSocket ss_obj;
     int [] clock_values = {0,0,0,0,0};
-    static int size = 2;
+    static int size = 3;
 
-
-
-    public void receive(){
-
+    public static int getPort() {
+        return port;
     }
 
-    public void send(){
-
-
-
+    public static int getClock() {
+        return clock;
     }
 
+    public static Socket getSocket_obj() {
+        return socket_obj;
+    }
 
+    public static ServerSocket getSs_obj() {
+        return ss_obj;
+    }
+
+    public int[] getClock_values() {
+        return clock_values;
+    }
+
+    public static int getSize() {
+        return size;
+    }
+
+    public static void setPort(int port) {
+        Server.port = port;
+    }
+
+    public static void setClock(int clock) {
+        Server.clock = clock;
+    }
+
+    public static void setSocket_obj(Socket socket_obj) {
+        Server.socket_obj = socket_obj;
+    }
+
+    public static void setSs_obj(ServerSocket ss_obj) {
+        Server.ss_obj = ss_obj;
+    }
+
+    public void setClock_values(int[] clock_values) {
+        this.clock_values = clock_values;
+    }
+
+    public static void setSize(int size) {
+        Server.size = size;
+    }
 
     public int  berkely_algoorithm(int[] a){
         int sum = 0;
@@ -39,21 +73,12 @@ public class Server extends Thread{
             sum = sum + a[i];
 
         }
-        int avg =  sum/size;
+        int avg =  sum/3;
         return avg;
         //send();
 
     }
 
-    public void encrypt()
-    {
-
-    }
-
-    public void decrypt()
-    {
-
-    }
 
     public static void main(String args[])
     {

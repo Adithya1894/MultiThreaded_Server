@@ -24,6 +24,54 @@ public class ClientWorker implements Runnable {
     }
 
     /**
+     * This Method receives the clock value from the decrypt method
+     *
+     */
+    public void receive(){
+
+        decrypt();
+
+    }
+
+    /**
+     * This Method is used to pass the clock value to the encrypt method
+     * Encrypt() Method is used to Encrypt() the clock value and send it to Different clients.
+     */
+    public void send(){
+
+        encrypt();
+
+    }
+
+    /**
+     * encrypt() Method encrypts the Clock value using Affine Chiper.
+     * The encryption Technique uses the encryption technique as Y = (aX + b)Mod 26; Y is the encrypted message
+     * where 'X' is the value to be encrypted.
+     * I am using the values a and b as 3 and 7.
+     * on the receiving side the Client decrypts() the message by taking the inverse of the encrypted message
+     */
+    public void encrypt()
+    {
+
+
+    }
+
+    /**
+     * This method receives the encrypted message from the client and takes the inverse of the encrypted message
+     * Passes the value back to the receive method
+     */
+    public void decrypt()
+    {
+
+
+    }
+
+
+
+
+
+
+    /**
      * Run method makes the Threads start processing
      */
     @Override
