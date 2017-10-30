@@ -66,6 +66,11 @@ public class Server extends Thread{
         Server.size = size;
     }
 
+    /**
+     * This Method calculates the Average of all the clock values.
+     * @param a
+     * @return
+     */
     public int  berkely_algoorithm(int[] a){
         int sum = 0;
         for(int i = 0; i < 5; i++)
@@ -73,7 +78,7 @@ public class Server extends Thread{
             sum = sum + a[i];
 
         }
-        int avg =  sum/3;
+        int avg =  sum/size;
         return avg;
         //send();
 

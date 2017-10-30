@@ -93,47 +93,46 @@ public class ClientWorker implements Runnable {
                /* if (in.read() == -1) {
                     System.out.println("end");
                 }*/ //else {
-                    try {
-                        //ANY DATA I GET FROM THIS STREAM IS FROM THIS PARTICULAR CLIENT ONLY!
-                        //if(in.read()!=-1)
-                            str = in.readLine();
-                            logical_clocks[id] = Integer.parseInt(str);
-                        //else{
-                          //  logical_clocks[id] = logical_clocks[id];
-                        //}
-                        //System.out.println("RECEIVED FROM CLIENT " + id + " " + logical_clocks[id]);
+                try {
+                    //ANY DATA I GET FROM THIS STREAM IS FROM THIS PARTICULAR CLIENT ONLY!
+                    //if(in.read()!=-1)
+                    str = in.readLine();
 
-                    } catch (IOException e) {
-                        System.exit(-1);
-                    }
-                    Server server_obj = new Server();
-                    int avg = server_obj.berkely_algoorithm(logical_clocks);
-                    int off[] = new int[5];
+                    int encrypted_data = Integer.parseInt(str);
+
+                    logical_clocks[id] = encrypted_data/3;
+
+                } catch (IOException e) {
+                    System.exit(-1);
+                }
+                Server server_obj = new Server();
+                int avg = server_obj.berkely_algoorithm(logical_clocks);
+                int off[] = new int[5];
                     /*for(int i = 0 ; i < 5; i++)
                     {
                         off[i] = avg;
                         //System.out.println(off[i]);
                     }*/
-                    int offset[] = new int[5];
-                    offset[id] = avg-logical_clocks[id];
-                    for(int i =0; i < 5; i++)
-                    {
-                        System.out.println(offset[i]+"\t\t"+ avg +"\t\t"+logical_clocks[i]);
-                    }
-                    //System.out.println("\n\n");
+                int offset[] = new int[5];
+                offset[id] = avg-logical_clocks[id];
+                for(int i =0; i < 5; i++)
+                {
+                    System.out.println(offset[i]+"\t\t"+ avg +"\t\t"+logical_clocks[i]);
+                }
+                //System.out.println("\n\n");
+                int dec_data = offset[id] * 3;
+                String s = Integer.toString(dec_data) + "\n";
+                dout.writeBytes(s);
 
-                    String s = Integer.toString(offset[id]) + "\n";
-                    dout.writeBytes(s);
-
-                    dout.flush();
-                    //System.out.println("FROM CLIENT " + id + ": " + logical_clocks[id]);
+                dout.flush();
+                //System.out.println("FROM CLIENT " + id + ": " + logical_clocks[id]);
 
 
-                    //for (int i = 0; i < 5; i++) {
-                    //System.out.println(logical_clocks[i]);
-                    //}
-                    System.out.println("\n\n");
-              //  }
+                //for (int i = 0; i < 5; i++) {
+                //System.out.println(logical_clocks[i]);
+                //}
+                System.out.println("\n\n");
+                //  }
             }
         } catch (IOException e) {
             e.printStackTrace();
